@@ -48,8 +48,14 @@ class WollPlatz(WebsiteScraper):
         ).text
         available: bool = availability_el.lower() == "lieferbar"
 
-        product_fullname: str = self.driver.find_element(
+        # e.g. Drops Safran Pink
+        variant_name: str = self.driver.find_element(
             By.XPATH, "//h1[contains(@id, 'pageheadertitle')]"
+        ).text
+
+        # e.g. Drops Safran
+        product_name: str = self.driver.find_element(
+            By.XPATH, "//span[contains(@class, 'variants-title-txt')]"
         ).text
 
         needle_size = self.get_optional_detail(
@@ -64,7 +70,8 @@ class WollPlatz(WebsiteScraper):
             price=price,
             available=available,
             vendor_product_url=product_url,
-            fullname=product_fullname,
+            name=product_name,
+            variant_name=variant_name,
             brand=brand,
             composition=composition,
             needle_size=needle_size,
