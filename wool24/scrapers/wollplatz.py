@@ -1,4 +1,6 @@
 # pylint: disable=missing-docstring
+import logging
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,6 +14,7 @@ class WollPlatz(WebsiteScraper):
     website_url = "https://wollplatz.de"
 
     def search_product_url(self, keywords: str) -> str:
+        logging.info(f"[{self.website_url}]: searching keyword..")
         self.driver.get(self.website_url)
         search_box = self.driver.find_element(By.ID, "searchSooqrTop")
         search_box.click()
@@ -25,6 +28,7 @@ class WollPlatz(WebsiteScraper):
                 )
             )
         except TimeoutException as ex:
+            logging.warning(f"[{self.website_url}]: keyword not found: {keywords}")
             raise ProductNotFoundException from ex
 
         product_url: str = search_result.find_element(
@@ -32,12 +36,15 @@ class WollPlatz(WebsiteScraper):
         ).get_attribute("href")
 
         if not product_url:
+            logging.warning(f"[{self.website_url}]: keyword not found: {keywords}")
             raise ProductNotFoundException
 
+        logging.info(f"[{self.website_url}]: keyword found.")
         return product_url
 
     def get_product_details(self, keywords: str) -> UpstreamProductInfo:
         product_url: str = self.search_product_url(keywords)
+        logging.info(f"[{self.website_url}]: scraping product page..")
         self.driver.get(product_url)
 
         price_str: str = self.driver.find_element(
@@ -72,6 +79,7 @@ class WollPlatz(WebsiteScraper):
         )
         brand = self.get_optional_detail("//td[.='Marke']/following-sibling::td[1]")
 
+        logging.info(f"[{self.website_url}]: scraping product page finished.")
         return UpstreamProductInfo(
             price=price,
             available=available,
