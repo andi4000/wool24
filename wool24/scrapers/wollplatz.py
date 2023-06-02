@@ -20,7 +20,6 @@ class WollPlatz(WebsiteScraper):
         search_box.click()
         search_box.send_keys(keywords)
 
-        # TODO: handle TimeoutException
         try:
             search_result = WebDriverWait(self.driver, 5).until(
                 EC.presence_of_element_located(
