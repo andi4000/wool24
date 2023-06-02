@@ -4,7 +4,7 @@ from wool24.crawler import Crawler
 from wool24.models import UpstreamProductInfo
 
 
-def test_crawler() -> None:
+def test_product_found() -> None:
     crawler = Crawler()
     expected = UpstreamProductInfo(
         price=1.3,
@@ -20,3 +20,9 @@ def test_crawler() -> None:
     results = crawler.scrape("Drops Safran")
     assert len(results) == 1
     assert expected == results[0]
+
+
+def test_product_not_found() -> None:
+    crawler = Crawler()
+    results = crawler.scrape("To be, or not to be")
+    assert len(results) == 0
