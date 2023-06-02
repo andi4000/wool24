@@ -27,12 +27,15 @@ RUN \
     apt-get update \
     && apt-get install -y --no-install-recommends \
     firefox-esr \
+    wget \
+    && wget -O /build/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux64.tar.gz \
+    && tar -C /usr/local/bin -xzf /build/geckodriver.tar.gz \
     && pip3 install -r /build/requirements.txt \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /build
 
-
 COPY wool24 /app/wool24
+
 ENV PYTHONPATH /app
 ENTRYPOINT [ "python", "/app/wool24/main.py" ]
 
