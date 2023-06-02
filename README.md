@@ -1,4 +1,4 @@
-# Wool24 Wool Comparison Site
+# Wool24 Wool Comparison Tool
 
 # Usage
 
