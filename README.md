@@ -22,27 +22,12 @@ docker compose build
   - needle size
   - composition
 
-1. Product lookup by User
-   As a user, I want to easily lookup for price information by entering brand and model name of the desired product.
-
-2. Add website by Moderator
-   As Moderator/Admin, I want to easily add a new website as source for price comparison
-
 # Specification
 
 ## Functional Features
 
 0. Main
    TODO
-
-1. Product lookup by user
-   TODO
-
-2. Add website by Moderator
-
-- Moderator needs to add following things:
-  - link to search on the website
-  - parent element of the search result
 
 ## Non-Functional Features
 
