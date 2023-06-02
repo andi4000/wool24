@@ -1,4 +1,5 @@
 # pylint: disable=missing-docstring
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -17,9 +18,14 @@ class WollPlatz(WebsiteScraper):
         search_box.send_keys(keywords)
 
         # TODO: handle TimeoutException
-        search_result = WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "productlist-mainholder"))
-        )
+        try:
+            search_result = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located(
+                    (By.CLASS_NAME, "productlist-mainholder")
+                )
+            )
+        except TimeoutException as ex:
+            raise ProductNotFoundException from ex
 
         product_url: str = search_result.find_element(
             By.XPATH, ".//h3/a"
