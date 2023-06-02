@@ -56,5 +56,6 @@ good-names = ["f", "n", "i", "ex", "fn", "k", "v", "q"]
 [tool.pylint."MESSAGES CONTROL"]
 disable = [
     "fixme",
+    "logging-fstring-interpolation",
 ]
 extension-pkg-whitelist = "pydantic"
