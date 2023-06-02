@@ -1,11 +1,11 @@
 # pylint: disable=missing-docstring
 
+from dataclasses import dataclass
 from typing import Optional
 
-from pydantic import BaseModel
 
-
-class UpstreamProductInfo(BaseModel):
+@dataclass
+class UpstreamProductInfo:
     price: float
     available: bool
     vendor_product_url: str

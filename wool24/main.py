@@ -2,6 +2,7 @@
 import argparse
 import logging
 import sys
+from dataclasses import asdict
 from io import TextIOWrapper
 
 from wool24.crawler import Crawler
@@ -40,5 +41,5 @@ if __name__ == "__main__":
     crawler = Crawler()
     results = crawler.scrape(keywords)
     for result in results:
-        outfile.write(result.json())
+        outfile.write(str(asdict(result)))
         outfile.write("\n")
