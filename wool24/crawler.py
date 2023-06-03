@@ -20,7 +20,7 @@ class Crawler:
         """Scrape keyword and write to database."""
         logging.info("Booting up browser instance")
         opts = Options()
-        opts.headless = True
+        opts.add_argument("-headless")
         self.driver = webdriver.Firefox(options=opts)
 
         scraper_results: list[UpstreamProductInfo] = []
