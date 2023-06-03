@@ -12,7 +12,7 @@ docker run wool24 -v "Drops Safran"  # writes to stdout
 # Overview
 
 - To extend scraping from a new website, create a new module in the directory
-  `wool24/wool24/scrapers/`, subclass from `wool24.scraper.WebsiteScraper`, and implement 
+  `wool24/wool24/scrapers/`, subclass from `wool24.website_scraper.WebsiteScraper`, and implement
   the `get_product_details()` function.
 - [Scrapy](https://scrapy.org/) seemed nice, but interacting with dynamic websites with it was
   very challenging. In the end I went with good ol' Selenium.
