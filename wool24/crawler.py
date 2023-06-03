@@ -6,13 +6,15 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.remote.webdriver import WebDriver
 
+from wool24 import scrapers
 from wool24.models import UpstreamProductInfo
-from wool24.scrapers import ProductNotFoundException, WebsiteScraper
+from wool24.website_scraper import ProductNotFoundException, WebsiteScraper
 
 
 class Crawler:
     def __init__(self) -> None:
         self.driver: Optional[WebDriver] = None
+        scrapers.load_modules()
 
     def scrape(self, keyword: str) -> list[UpstreamProductInfo]:
         """Scrape keyword and write to database."""

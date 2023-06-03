@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from wool24.models import UpstreamProductInfo
-from wool24.scrapers import ProductNotFoundException, WebsiteScraper
+from wool24.website_scraper import ProductNotFoundException, WebsiteScraper
 
 
 class WollPlatz(WebsiteScraper):
